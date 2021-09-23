@@ -23,9 +23,9 @@ create table products (
     price   double precision not null check ( price > 0 )
 );
 
-create table order_item (
-    order_code  integer references orders(code),
-    product_id  varchar references products(id),
+create table order_items (
+    order_code  integer references orders(code) on delete cascade,
+    product_id  varchar references products(id) on delete restrict,
     quantity    integer not null check ( quantity > 0 ),
     primary key (order_code, product_id)
 );
