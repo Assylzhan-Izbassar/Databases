@@ -29,7 +29,7 @@ where grade not in ('C', 'F');
 they taught; */
 select distinct name from (
     select instructor.id, name, course_id, dept_name from instructor
-        left join teaches t on instructor.id = t."id"
+        left join teaches t on instructor.id = t.id
                   ) as subinstructor
 left join takes on takes.course_id = subinstructor.course_id
 where grade != 'A';

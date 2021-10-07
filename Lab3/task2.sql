@@ -54,8 +54,19 @@ where dept_name
           in ('Biology', 'Philosophy', 'Music');
 
 /* f. Find all instructors who taught in the 2018 year but not in the 2017 year; */
-select * from (select instructor.id, name, year from instructor
-left join teaches on instructor.id = teaches.id
-group by year, name, instructor.id) as A;
+-- select * from instructor;
+-- select * from teaches;
+--
+-- select *
+-- from instructor
+-- left join teaches t on instructor.id = t.id;
 
--- не  до конца сделанный
+select * from instructor
+where id in (select distinct instructor.id
+    from instructor
+    left join teaches t on instructor.id = t.id
+    where year = 2018 and instructor.id not in (
+        select id
+        from teaches
+        where year = 2017
+    ));
