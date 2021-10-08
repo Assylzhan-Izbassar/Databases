@@ -70,3 +70,6 @@ where id in (select distinct instructor.id
         from teaches
         where year = 2017
     ));
+
+select * from instructor;
+select * from teaches;
