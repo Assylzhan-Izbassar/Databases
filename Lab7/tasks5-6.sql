@@ -61,7 +61,7 @@ from accounts;
 select *
 from transactions;
 
-call money_transaction2('RS88012', 'NT10204', 300);
+call money_transaction2('RS88012', 'NT10204', 3700);
 call money_transaction2('NT10204', 'RS88012', 300);
 
 call money_transaction2('AB10203', 'NK90123', 300);
