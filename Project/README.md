@@ -20,6 +20,6 @@ The application is a package delivery company (similar to FedEx, UPS, DHL, the U
 ## Queries
 
 <p>
-  -- The queries for this project is represented in <a href="https://github.com/Assylzhan-Izbassar/Databases/blob/main/Project/queries.sql">queries.sql</a> file. Their the queries of
+  -- The queries for this project is represented in <a href="https://github.com/Assylzhan-Izbassar/Databases/blob/main/Project/queries.sql">queries.sql</a> file. Their the queries of </br>
   * Find all customers who had a package on that truck at the time of the crash, find all recipients who had a package on that truck at the time of the crash and etc.
 </p>
