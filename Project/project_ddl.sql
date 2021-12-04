@@ -1,64 +1,51 @@
 create database package_delivery_company;
 
--- creating address as composite type
-create type address as
-(
-    country   varchar,
-    city      varchar,
-    street    varchar,
-    apartment varchar
-);
-
--- creating company table
-create table company
-(
-    company_id  varchar(8),
-    name        varchar,
-    description varchar,
-    address     address,
-    primary key (company_id)
-);
+drop table customers;
+drop table orders;
+drop table packages;
+drop table international_shipments;
+drop table declarations;
+drop table types;
+drop table locations;
+drop table invoices;
+drop table debts;
+drop table contracts;
 
 /* Package side */
 -- creating package table
-create table package
+create table packages
 (
     package_id          varchar(8),
     destination         varchar(56),
-    address             address,
-    final_delivery_date timestamp,
+    city varchar(20),
+    street varchar(20),
+    apartment varchar(20),
+    approximate_delivery_date timestamp,
     sent_time           timestamp,
+    actual_delivery_date timestamp,
+    is_delivered boolean,
     primary key (package_id)
 );
 
--- creating delivery status table
-create table delivery_status
-(
-    package_id   varchar(8),
-    description  varchar(20),
-    updated_time timestamp,
-    is_delivered boolean,
-    primary key (package_id, description)
-);
-
 -- creating type table
-create table type
+create table types
 (
     type_id    varchar(8),
     package_id varchar(8),
     item_type  varchar(20),
     wight      double precision,
-    dimensions varchar, -- needs to be modified
+    dimensions varchar(20),
     primary key (type_id),
     foreign key (package_id) references package
         on delete cascade
 );
 
 -- creating international shipment table
-create table international_shipment
+create table international_shipments
 (
     shipment_id varchar(8),
     package_id varchar(8),
+    country_name varchar(20),
     international_stamp varchar(20),
     creation_date timestamp,
     primary key (shipment_id),
@@ -67,7 +54,7 @@ create table international_shipment
 );
 
 -- creating declaration table
-create table declaration
+create table declarations
 (
     declaration_id varchar(8),
     shipment_id varchar(8),
@@ -80,39 +67,23 @@ create table declaration
 );
 
 /* Customer side */
--- creating name as composite type
-create type name as
-(
-    first_name varchar(16),
-    last_name varchar(16)
-);
 
 -- creating customer table
 create table customers
 (
     customer_id varchar(8),
     order_id varchar(8),
-    name name,
-    address address,
+    first_name varchar(20),
+    last_name varchar(20),
+    city varchar(20),
+    street varchar(20),
+    apartment varchar(20),
     phone_number varchar(14),
     email varchar(20),
-    is_receiver boolean,
-    is_sender boolean,
+    is_received boolean,
     primary key (customer_id),
     foreign key (order_id) references orders
         on delete set null
-);
-
--- creating customer status table
-create table customer_status
-(
-    status_id varchar(8),
-    customer_id varchar(8),
-    is_received boolean,
-    rating int, -- needed to modified
-    primary key (status_id),
-    foreign key (customer_id) references customers
-        on delete cascade
 );
 
 /* Order side */
@@ -121,15 +92,16 @@ create table orders
 (
     order_id varchar(8),
     package_id varchar(8),
+    customer_id varchar(8),
     title varchar(20),
-    description varchar(200),
+    receiver_name varchar(20),
     price double precision,
     creation_date timestamp,
     primary key (order_id, package_id)
 );
 
 -- creating invoice table
-create table invoice
+create table invoices
 (
     invoice_id varchar(8),
     customer_id varchar(8),
@@ -143,19 +115,21 @@ create table invoice
 );
 
 -- creating debt table
-create table debt
+create table debts
 (
     debt_id varchar(8),
     invoice_id varchar(8),
     debt_type varchar(8),
     generated_date timestamp,
     due_date timestamp,
-    finished_in int
-        generated always as (due_date - generated_date) stored
+    finished_time timestamp,
+    primary key (debt_id),
+    foreign key (invoice_id) references debt
+        on delete cascade
 );
 
 -- creating contract table
-create table contract
+create table contracts
 (
     contract_id varchar(8),
     debt_id varchar(8),
@@ -169,48 +143,18 @@ create table contract
 
 /* Location side */
 -- creating location table
-create table location
+create table locations
 (
-    savepoint_id varchar(8),
+    location_id varchar(8),
     package_id varchar(8),
-    description varchar,
+    latitude double precision,
+    longitude double precision,
+    status varchar(20),
+    date_in_time timestamp,
     truck_id varchar(8),
     plan_id varchar(8),
     warehouse_code varchar(8),
-    primary key (savepoint_id, package_id)
-);
-
--- creating savepoint table
-create table savepoint
-(
-    savepoint_id varchar(8),
-    latitude double precision,
-    longitude double precision,
-    date_in_time timestamp,
-    primary key (savepoint_id)
-);
-
--- creating truck table
-create table truck
-(
-    track_id varchar(8),
-    license_num varchar(12),
-    primary key (track_id)
-);
-
--- creating plane table
-create table plane
-(
-    plane_id varchar(8),
-    plane_name varchar(12),
-    primary key (plane_id)
-);
-
--- creating warehouse table
-create table warehouse
-(
-    warehouse_code varchar(8),
-    address address,
-    phone_number varchar(12),
-    primary key (warehouse_code)
+    primary key (package_id),
+    foreign key (package_id) references package
+        on delete cascade
 );
