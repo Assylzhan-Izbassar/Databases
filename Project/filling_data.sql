@@ -650,3 +650,8 @@ $$;
 call setRandomData2Locations(8);
 select *
 from locations;
+
+insert into locations values ('z5869', 'S2729', 46.59501, 84.59501, 'delivered', '2011-08-17 01:53:28.620300', '1721', null, null);
+insert into locations values ('t5439', 'e9857', 56.59501, 66.59501, 'broken', '2018-06-17 01:53:28.620300', '1721', null, null);
+insert into locations values ('p5519', 'L6920', 43.59501, 62.59501, 'delivered', '2015-04-17 01:53:28.620300', '1721', null, null);
+insert into locations values ('L5169', 'z7736', 41.59501, 56.59501, 'delivered', '2012-02-17 01:53:28.620300', '1721', null, null);
