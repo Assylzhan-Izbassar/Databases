@@ -8,3 +8,5 @@ The application is a package delivery company (similar to FedEx, UPS, DHL, the U
 </p>
 <p> <b>Description of ERD:</b></br>
 ● 1-1, 1-N and N-N lines depicts One-to-One, One-to-Many and Many-to-Many respectively.</br>
+● Green Color Rectangles are Entities and Double Walled Rectangles are Weak Entities.</br>
+</p>
