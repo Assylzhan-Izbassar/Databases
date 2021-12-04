@@ -13,8 +13,8 @@ The application is a package delivery company (similar to FedEx, UPS, DHL, the U
 
 ## Building Relatial Model
 <p>
-  -- In the project ddl file <a href="https://github.com/Assylzhan-Izbassar/Databases/blob/main/Project/project_ddl.sql">project_ddl.sql</a>, we can see the data definition part of our project. That is the relational model created by PostgreSQL database.
-  -- In filling data file <a href="https://github.com/Assylzhan-Izbassar/Databases/blob/main/Project/filling_data.sql">filling_data.sql</a>, we can look at random data that generated with procedures. With the written procedures we can create counted data immediately, although it will be random. 
+  -- In the project ddl file <a href="https://github.com/Assylzhan-Izbassar/Databases/blob/main/Project/project_ddl.sql">project_ddl.sql</a>, we can see the data definition part of our project. That is the relational model created by PostgreSQL database. </br>
+  -- In filling data file <a href="https://github.com/Assylzhan-Izbassar/Databases/blob/main/Project/filling_data.sql">filling_data.sql</a>, we can look at random data that generated with procedures. With the written procedures we can create counted data immediately, although it will be random. </br>
 </p>
 
 ## Queries
