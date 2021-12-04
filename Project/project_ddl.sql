@@ -155,7 +155,7 @@ create table locations
     truck_id       varchar(8),
     plan_id        varchar(8),
     warehouse_code varchar(8),
-    primary key (package_id),
+    primary key (location_id),
     foreign key (package_id) references packages
         on delete cascade
 );
