@@ -42,18 +42,20 @@ $$ language plpgsql;
 
 select is_even(4) as is_even;
 
--- d. Checks some password for validity. ???
+-- d. Checks some password for validity.
 create or replace function validation(x varchar)
     returns boolean as
 $$
 begin
-    if x.length > 8 then
+    if length(x) >= 8 and x = initcap(x) then
         return true;
     else
         return false;
     end if;
-end;
+end
 $$ language plpgsql;
+
+select validation('Dick2012');
 
 -- e. Returns two outputs, but has one input.
 create or replace function pair_output(x int, out y int, out z int)
